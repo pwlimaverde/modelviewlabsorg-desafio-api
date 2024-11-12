@@ -1,6 +1,6 @@
 import 'package:dependencies/dependencies.dart';
 
-class LoginController extends GetxController {
+class ValidaSenhaController extends GetxController {
 
   final teste = ''.obs;
 

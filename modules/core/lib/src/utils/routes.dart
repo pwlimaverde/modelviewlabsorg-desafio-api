@@ -1,7 +1,6 @@
 enum Routes {
   initial(caminho: "/"),
-  login(caminho: "/login"),
-  home(caminho: "/home");
+  confirmaValidaSenha(caminho: "/confirmavalidasenha");
 
   final String caminho;
   const Routes({required this.caminho});
