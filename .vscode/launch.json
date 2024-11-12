@@ -1,0 +1,40 @@
+{
+    // Use o IntelliSense para saber mais sobre os atributos possíveis.
+    // Focalizar para exibir as descrições dos atributos existentes.
+    // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "client_android_modelviewlabsorg_desafio_api  - DEV",
+            "cwd": "apps\\client_android_modelviewlabsorg_desafio_api",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define-from-file=env/dev.json",
+            ]
+        },
+        {
+            "name": "client_android_modelviewlabsorg_desafio_api  - PROD",
+            "cwd": "apps\\client_android_modelviewlabsorg_desafio_api",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define-from-file=env/prod.json",
+            ]
+        },
+        {
+            "name": "client_android_modelviewlabsorg_desafio_api (profile mode)",
+            "cwd": "apps\\client_android_modelviewlabsorg_desafio_api",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "client_android_modelviewlabsorg_desafio_api (release mode)",
+            "cwd": "apps\\client_android_modelviewlabsorg_desafio_api",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+    ]
+}
