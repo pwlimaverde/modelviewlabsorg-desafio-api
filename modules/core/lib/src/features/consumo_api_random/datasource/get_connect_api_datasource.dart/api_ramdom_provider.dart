@@ -19,7 +19,7 @@ class ApiRandomProvider extends GetConnect {
 
   }
 
-  Future<Response> getPong() => get('$apiEndpoint$apiRandom');
+  Future<Response> getRandom() => get('$apiEndpoint$apiRandom');
 
 
 }

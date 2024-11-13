@@ -1,12 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dependencies/dependencies.dart';
 
-class ApiRandomProvider extends GetConnect {
+class ApiValidateProvider extends GetConnect {
   final String apiEndpoint;
-  final String apiRandom;
-  ApiRandomProvider({
+  final String apiValidate;
+  ApiValidateProvider({
     required this.apiEndpoint,
-    required this.apiRandom,
+    required this.apiValidate,
   });
 
   @override
@@ -16,10 +16,12 @@ class ApiRandomProvider extends GetConnect {
       request.headers['no-delay'] = 'false';
       return request;
     });
-
   }
 
-  Future<Response> getPong() => get('$apiEndpoint$apiRandom');
-
-
+  Future<Response> postValidator(String body) => post(
+        '$apiEndpoint$apiValidate',
+        {
+          'password': body,
+        },
+      );
 }

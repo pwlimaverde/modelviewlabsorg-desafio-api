@@ -12,10 +12,12 @@ final class ParametrosRandom implements ParametersReturnResult {
 }
 
 final class ParametrosValidate implements ParametersReturnResult {
+  final String password;
   @override
   final ApiValidateError error;
 
   ParametrosValidate({
     required this.error,
+    required this.password,
   });
 }

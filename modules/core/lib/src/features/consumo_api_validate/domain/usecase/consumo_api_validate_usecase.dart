@@ -11,7 +11,8 @@ final class ConsumoApiValidateUsecase
 
   @override
   Future<ReturnSuccessOrError<ValidateSuccessModel>> call(
-      ParametrosValidate parameters) async {
+    ParametrosValidate parameters,
+  ) async {
     final resultDatacource = await resultDatasource(
       parameters: parameters,
       datasource: datasource,
@@ -20,6 +21,7 @@ final class ConsumoApiValidateUsecase
     switch (resultDatacource) {
       case SuccessReturn<DataApiResponseValidate>():
         final data = resultDatacource.result.responseMap;
+
         if (data.keys.contains('id')) {
           return SuccessReturn(
             success: ValidateSuccessModel.fromMap(data),
@@ -34,12 +36,14 @@ final class ConsumoApiValidateUsecase
 
       case ErrorReturn<DataApiResponseValidate>():
         return ErrorReturn(
-            error: ApiValidateError(
-                message:
-                    "Falha ao carregar dados da API.",
-                errorResponse: ErrorResponseModel(
-                  message: "Falha ao carregar dados da API. t - ${resultDatacource.result.message}",
-                )));
+          error: ApiValidateError(
+            message: "Falha ao carregar dados da API.",
+            errorResponse: ErrorResponseModel(
+              message:
+                  "Falha ao carregar dados da API. t - ${resultDatacource.result.message}",
+            ),
+          ),
+        );
     }
   }
 }

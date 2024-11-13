@@ -9,6 +9,7 @@ class ValidaSenhaController extends GetxController {
 
   final isPong = false.obs;
   final radomPassword = ''.obs;
+  final validatePassword = <String, dynamic>{}.obs;
 
   Future<void> consumoApiPing({
     required VoidCallback onSuccess,
@@ -41,6 +42,21 @@ class ValidaSenhaController extends GetxController {
       onSuccess();
     } catch (e) {
       radomPassword('Erro ao gerar senha');
+      onFail();
+    }
+  }
+  Future<void> consumoApiValidator({
+    required VoidCallback onSuccess,
+    required VoidCallback onFail,
+    required String password,
+  }) async {
+    try {
+      final result = await _featuresCorePresenter.consumoApiValidator(password);
+      Logger().i(result);
+      validatePassword(result);
+      onSuccess();
+    } catch (e) {
+      radomPassword('Erro ao validar senha');
       onFail();
     }
   }

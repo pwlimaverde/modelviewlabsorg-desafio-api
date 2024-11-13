@@ -16,7 +16,7 @@ final class ConsumoApiRandomDatasource
     ParametrosRandom parameters,
   ) async {
     try {
-      final response = await apiProvider.getPong();
+      final response = await apiProvider.getRandom();
 
       switch (response.statusCode) {
         case 200:

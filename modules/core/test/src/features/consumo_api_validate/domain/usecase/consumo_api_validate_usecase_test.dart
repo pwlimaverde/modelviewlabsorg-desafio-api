@@ -24,7 +24,7 @@ void main() {
           message: "Password format is invalid",
           errors: ["Password must contain at least 8 characters"],
         ),
-      ),
+      ), password: '12345678',
     );
     datasource = ConsumoApiValidateDatasourceMock();
     consumoApiValidateUsecase = ConsumoApiValidateUsecase(datasource);

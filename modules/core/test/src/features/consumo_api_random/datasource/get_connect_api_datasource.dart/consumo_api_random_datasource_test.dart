@@ -23,7 +23,7 @@ void main() {
   test(
       'Deve retornar um DataApiResponsePing com PasswordSchemaModel(password: 1d16313A-f794-4470-adc1-4c7637d0b9ca)',
       () async {
-    when(() => apiProvider.getPong()).thenAnswer(
+    when(() => apiProvider.getRandom()).thenAnswer(
       (_) => Future.value(const Response<dynamic>(
         body: {"password": "1d16313A-f794-4470-adc1-4c7637d0b9ca"},
         statusCode: 200,
@@ -36,7 +36,7 @@ void main() {
   });
 
   test('Deve retornar uma Exception - "ApiPingError - Método não permitido!")', () async {
-    when(() => apiProvider.getPong()).thenAnswer(
+    when(() => apiProvider.getRandom()).thenAnswer(
       (_) => Future.value(const Response<dynamic>(
         body: null,
         statusCode: 405,
@@ -52,7 +52,7 @@ void main() {
   });
 
    test('Deve retornar uma Exception - "ApiPingError - Resposta inválidada do servidor - null")', () async {
-    when(() => apiProvider.getPong()).thenAnswer(
+    when(() => apiProvider.getRandom()).thenAnswer(
       (_) => Future.value(const Response<dynamic>(
         body: null,
         statusCode: null,
@@ -68,7 +68,7 @@ void main() {
   });
 
   test('Deve retornar uma Exception', () async {
-    when(() => apiProvider.getPong()).thenThrow(Exception());
+    when(() => apiProvider.getRandom()).thenThrow(Exception());
 
     expect(() async => await datasource(parameters), throwsA(isA<ApiRandomError>()));
   });

@@ -48,7 +48,8 @@ class ValidaSenhaPage extends GetView<ValidaSenhaController> {
                   onPressed: () {
                     controller.consumoApiRandom(
                       onSuccess: () {
-                        Get.snackbar("Sucesso", "Sucesso ao Gerar senha pela API");
+                        Get.snackbar(
+                            "Sucesso", "Sucesso ao Gerar senha pela API");
                       },
                       onFail: () {
                         Get.snackbar("Erro", "Erro ao Gerar senha pela API");
@@ -56,6 +57,27 @@ class ValidaSenhaPage extends GetView<ValidaSenhaController> {
                     );
                   },
                   icon: const FaIcon(FontAwesomeIcons.userXmark)),
+            ),
+          ),
+          Center(
+            child: SizedBox(
+              width: 80,
+              height: 80,
+              child: IconButton(
+                  onPressed: () {
+                    controller.consumoApiValidator(
+                      onSuccess: () {
+                        Get.snackbar(
+                            "Sucesso", "Sucesso ao Validar a senha pela API");
+                      },
+                      onFail: () {
+                        Get.snackbar(
+                            "Erro", "Erro ao Validar a senha pela API");
+                      },
+                      password: 't8p#oOue45',
+                    );
+                  },
+                  icon: const FaIcon(FontAwesomeIcons.angellist)),
             ),
           ),
           Center(
@@ -70,6 +92,22 @@ class ValidaSenhaPage extends GetView<ValidaSenhaController> {
               width: 80,
               height: 80,
               child: Obx(() => Text(controller.radomPassword.value)),
+            ),
+          ),
+          Center(
+            child: SizedBox(
+              width: 200,
+              height: 200,
+              child:
+                  Obx(() => Text(controller.validatePassword.value['message'].toString())),
+            ),
+          ),
+          Center(
+            child: SizedBox(
+              width: 200,
+              height: 200,
+              child:
+                  Obx(() => Text(controller.validatePassword.value['errors'].toString())),
             ),
           ),
         ],

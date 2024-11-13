@@ -21,12 +21,12 @@ final class ApiRandomError implements AppError {
 }
 
 final class ApiValidateError implements AppError {
-  final ErrorResponseModel errorResponse;
+  final ErrorResponseModel? errorResponse;
   @override
   String message;
   ApiValidateError({
     required this.message,
-    required this.errorResponse,
+    this.errorResponse,
   });
   @override
   String toString() {

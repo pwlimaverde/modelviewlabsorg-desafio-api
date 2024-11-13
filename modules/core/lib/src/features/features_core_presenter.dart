@@ -10,21 +10,25 @@ final class FeaturesCorePresenter {
 
   final CAPUsecase _consumoApiPingUsecase;
   final CARUsecase _consumoApiRandomUsecase;
+  final CAVUsecase _consumoApiValidateUsecase;
 
   FeaturesCorePresenter._({
     required CAPUsecase consumoApiPingUsecase,
-    required CARUsecase consumoApiRandomUsecase
-    
-  }) : _consumoApiPingUsecase = consumoApiPingUsecase, _consumoApiRandomUsecase = consumoApiRandomUsecase;
+    required CARUsecase consumoApiRandomUsecase,
+    required CAVUsecase consumoApiValidateUsecase,
+  })  : _consumoApiPingUsecase = consumoApiPingUsecase,
+        _consumoApiValidateUsecase = consumoApiValidateUsecase,
+        _consumoApiRandomUsecase = consumoApiRandomUsecase;
 
   factory FeaturesCorePresenter({
     required CAPUsecase consumoApiPingUsecase,
-    required CARUsecase consumoApiRandomUsecase
-    
+    required CARUsecase consumoApiRandomUsecase,
+    required CAVUsecase consumoApiValidateUsecase,
   }) {
     _instance ??= FeaturesCorePresenter._(
       consumoApiPingUsecase: consumoApiPingUsecase,
-      consumoApiRandomUsecase: consumoApiRandomUsecase
+      consumoApiRandomUsecase: consumoApiRandomUsecase,
+      consumoApiValidateUsecase: consumoApiValidateUsecase,
     );
     return _instance!;
   }
@@ -57,5 +61,28 @@ final class FeaturesCorePresenter {
         throw data.result;
     }
   }
+
+  Future<Map<String, dynamic>> consumoApiValidator(String password) async {
+    final data = await _consumoApiValidateUsecase(
+      ParametrosValidate(
+        error: ApiValidateError(
+          message: "Errro ao carregar dados da API",
+        ),
+        password: password,
+      ),
+    );
+    switch (data) {
+      case SuccessReturn<ValidateSuccessModel>():
+        return data.result.toMap();
+      case ErrorReturn<ValidateSuccessModel>():
+        final error = data.result;
+        if (error is ApiValidateError) {
+          return error.errorResponse?.toMap() ?? {};
+        } else {
+          throw error.message;
+        }
+    }
+  }
+
   static FeaturesCorePresenter get to => Get.find<FeaturesCorePresenter>();
 }
