@@ -33,7 +33,7 @@ class ValidaSenhaPage extends GetView<ValidaSenhaController> {
                         Get.snackbar("Sucesso", "Sucesso ao Chamar API");
                       },
                       onFail: () {
-                        Get.snackbar("Erro", "Erro ao ao Chamar API");
+                        Get.snackbar("Erro", "Erro ao Chamar API");
                       },
                     );
                   },
@@ -46,19 +46,14 @@ class ValidaSenhaPage extends GetView<ValidaSenhaController> {
               height: 80,
               child: IconButton(
                   onPressed: () {
-                    // mostrarDialogoConfirmacao(onSuccess: () {
-                    //   controller.apagarConta(
-                    //     confirmacao: true,
-                    //     onSuccess: () {
-                    //       Get.snackbar("Sucesso", "Sucesso ao apagar a conta");
-                    //       Get.toNamed("/login");
-                    //     },
-                    //     onFail: () {
-                    //       Get.snackbar("Erro", "Erro ao apagar a conta");
-                    //     },
-                    //   );
-                    //   Get.back();
-                    // });
+                    controller.consumoApiRandom(
+                      onSuccess: () {
+                        Get.snackbar("Sucesso", "Sucesso ao Gerar senha pela API");
+                      },
+                      onFail: () {
+                        Get.snackbar("Erro", "Erro ao Gerar senha pela API");
+                      },
+                    );
                   },
                   icon: const FaIcon(FontAwesomeIcons.userXmark)),
             ),
@@ -68,6 +63,13 @@ class ValidaSenhaPage extends GetView<ValidaSenhaController> {
               width: 80,
               height: 80,
               child: Obx(() => Text(controller.isPong.value.toString())),
+            ),
+          ),
+          Center(
+            child: SizedBox(
+              width: 80,
+              height: 80,
+              child: Obx(() => Text(controller.radomPassword.value)),
             ),
           ),
         ],
