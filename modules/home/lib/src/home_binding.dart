@@ -5,14 +5,14 @@ import 'ui/valida_senha/valida_senha_controller.dart';
 
 class HomeBinding implements Binding {
   @override
-  List<Bind> dependencies() =>[
-    Bind.lazyPut<ConfirmaValidaSenhaController>(
-      () => ConfirmaValidaSenhaController(),
-    ),
-    Bind.lazyPut<ValidaSenhaController>(
-      () => ValidaSenhaController(
-        featuresCorePresenter: Get.find<FeaturesCorePresenter>(),
-      ),
-    ),
-  ];
+  List<Bind> dependencies() => [
+        Bind.lazyPut<ConfirmaValidaSenhaController>(
+          () => ConfirmaValidaSenhaController(),
+        ),
+        Bind.lazyPut<ValidaSenhaController>(
+          () => ValidaSenhaController(
+            coreController: Get.find<CoreController>(),
+          ),
+        ),
+      ];
 }

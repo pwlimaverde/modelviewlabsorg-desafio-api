@@ -1,3 +1,7 @@
+## 0.0.3
+Desenvolvimento do layout.
+1 - Configuração core controller para disponibilizar os metodos de consumo da api.
+
 ## 0.0.2
 Desenvolvimento do código fonte.
 1 - Conficuração dos and points para consumo da api.

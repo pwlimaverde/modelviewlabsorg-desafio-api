@@ -74,7 +74,7 @@ class ValidaSenhaPage extends GetView<ValidaSenhaController> {
                         Get.snackbar(
                             "Erro", "Erro ao Validar a senha pela API");
                       },
-                      password: 't8p#oOue45',
+                      password: '123456',
                     );
                   },
                   icon: const FaIcon(FontAwesomeIcons.angellist)),

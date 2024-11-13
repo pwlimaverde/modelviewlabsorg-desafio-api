@@ -2,10 +2,10 @@
 import 'package:dependencies/dependencies.dart';
 
 class ValidaSenhaController extends GetxController {
-  final FeaturesCorePresenter _featuresCorePresenter;
+  final CoreController _coreController;
   ValidaSenhaController({
-    required FeaturesCorePresenter featuresCorePresenter,
-  }) : _featuresCorePresenter = featuresCorePresenter;
+    required CoreController coreController,
+  }) : _coreController = coreController;
 
   final isPong = false.obs;
   final radomPassword = ''.obs;
@@ -16,7 +16,7 @@ class ValidaSenhaController extends GetxController {
     required VoidCallback onFail,
   }) async {
     try {
-      final result = await _featuresCorePresenter.consumoApiPing();
+      final result = await _coreController.consumoApiPing();
 
       if (result) {
         isPong(true);
@@ -36,8 +36,7 @@ class ValidaSenhaController extends GetxController {
     required VoidCallback onFail,
   }) async {
     try {
-      final result = await _featuresCorePresenter.consumoApiRandom();
-
+      final result = await _coreController.consumoApiRandom();
       radomPassword(result);
       onSuccess();
     } catch (e) {
@@ -45,14 +44,14 @@ class ValidaSenhaController extends GetxController {
       onFail();
     }
   }
+
   Future<void> consumoApiValidator({
     required VoidCallback onSuccess,
     required VoidCallback onFail,
     required String password,
   }) async {
     try {
-      final result = await _featuresCorePresenter.consumoApiValidator(password);
-      Logger().i(result);
+      final result = await _coreController.consumoApiValidator(password);
       validatePassword(result);
       onSuccess();
     } catch (e) {
