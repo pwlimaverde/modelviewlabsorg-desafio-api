@@ -4,6 +4,7 @@ Desenvolvimento do código fonte.
 2 - Criação dos Models.
 3 - Criação da feature e testes para consumo da API endpoint pong.
 4 - Criação da feature e testes para consumo da API endpoint random.
+5 - Criação da feature e testes para consumo da API endpoint validate.
 
 ## 0.0.1
 Configuração inicial do projeto.
