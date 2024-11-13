@@ -1,27 +1,21 @@
-// import 'package:return_success_or_error/return_success_or_error.dart';
+import 'package:dependencies/dependencies.dart';
 
-// import 'erros.dart';
+import 'erros.dart';
 
-// final class ParametrosEmailAndPassword implements ParametersReturnResult {
-//   final String email;
-//   final String password;
-//   @override
-//   final AuthError error;
+final class ParametrosRandom implements ParametersReturnResult {
+  @override
+  final ApiRandomError error;
 
-//   ParametrosEmailAndPassword({
-//     required this.email,
-//     required this.password,
-//     required this.error,
-//   });
-// }
+  ParametrosRandom({
+    required this.error,
+  });
+}
 
-// final class ParametrosEmail implements ParametersReturnResult {
-//   final String email;
-//   @override
-//   final AuthError error;
+final class ParametrosValidate implements ParametersReturnResult {
+  @override
+  final ApiValidateError error;
 
-//   ParametrosEmail({
-//     required this.email,
-//     required this.error,
-//   });
-// }
+  ParametrosValidate({
+    required this.error,
+  });
+}

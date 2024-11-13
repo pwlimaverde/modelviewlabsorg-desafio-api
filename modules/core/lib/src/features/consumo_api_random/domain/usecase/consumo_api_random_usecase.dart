@@ -1,6 +1,7 @@
 import 'package:dependencies/dependencies.dart';
 
 import '../../../../utils/erros.dart';
+import '../../../../utils/parameters.dart';
 import 'model/data_api_response_random.dart';
 
 ///Usecase with external Datasource call
@@ -10,7 +11,7 @@ final class ConsumoApiRandomUsecase
 
   @override
   Future<ReturnSuccessOrError<PasswordSchemaModel>> call(
-      NoParams parameters) async {
+      ParametrosRandom parameters) async {
     final resultDatacource = await resultDatasource(
       parameters: parameters,
       datasource: datasource,
@@ -25,7 +26,7 @@ final class ConsumoApiRandomUsecase
 
       case ErrorReturn<DataApiResponseRandom>():
         return ErrorReturn(
-            error: ApiPingError(message: "Falha ao carregar dados da API. - ${resultDatacource.result.message}"));
+            error: ApiRandomError(message: "Falha ao carregar dados da API. - ${resultDatacource.result.message}"));
     }
   }
 }

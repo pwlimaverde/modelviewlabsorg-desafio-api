@@ -1,8 +1,7 @@
 import 'package:dependencies/dependencies.dart';
 
-import '../../../../utils/parameters.dart';
-import '../../domain/usecase/model/data_api_response_random.dart';
-import 'api_ramdom_provider.dart';
+import '../../domain/usecase/model/data_api_response_validate.dart';
+import 'api_validate_provider.dart';
 
 ///Datasources
 final class ConsumoApiRandomDatasource
@@ -13,7 +12,7 @@ final class ConsumoApiRandomDatasource
   });
   @override
   Future<DataApiResponseRandom> call(
-    ParametrosRandom parameters,
+    NoParams parameters,
   ) async {
     try {
       final response = await apiProvider.getPong();

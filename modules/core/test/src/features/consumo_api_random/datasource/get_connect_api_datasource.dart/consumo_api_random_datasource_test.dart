@@ -2,6 +2,7 @@ import 'package:core/src/features/consumo_api_random/datasource/get_connect_api_
 import 'package:core/src/features/consumo_api_random/datasource/get_connect_api_datasource.dart/consumo_api_random_datasource.dart';
 import 'package:core/src/features/consumo_api_random/domain/usecase/model/data_api_response_random.dart';
 import 'package:core/src/utils/erros.dart';
+import 'package:core/src/utils/parameters.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -9,12 +10,12 @@ import 'package:mocktail/mocktail.dart';
 final class ApiProviderMock extends Mock implements ApiRandomProvider {}
 
 void main() {
-  late NoParams parameters;
+  late ParametrosRandom parameters;
   late ApiRandomProvider apiProvider;
   late Datasource<DataApiResponseRandom> datasource;
 
   setUp(() {
-    parameters = NoParams(error: ApiPingError(message: "teste data"));
+    parameters = ParametrosRandom(error: ApiRandomError(message: "teste data"));
     apiProvider = ApiProviderMock();
     datasource = ConsumoApiRandomDatasource(apiProvider: apiProvider);
   });
@@ -45,8 +46,8 @@ void main() {
     try {
       await datasource(parameters);
       fail('Deveria ter lançado uma exceção!');
-    } on ApiPingError catch (e) {
-      expect(e.message, "ApiPingError - Método não permitido!");
+    } on ApiRandomError catch (e) {
+      expect(e.message, "ApiRandomError - Método não permitido!");
     }
   });
 
@@ -61,14 +62,14 @@ void main() {
     try {
       await datasource(parameters);
       fail('Deveria ter lançado uma exceção!');
-    } on ApiPingError catch (e) {
-      expect(e.message, "ApiPingError - Resposta inválidada do servidor - null");
+    } on ApiRandomError catch (e) {
+      expect(e.message, "ApiRandomError - Resposta inválidada do servidor - null");
     }
   });
 
   test('Deve retornar uma Exception', () async {
     when(() => apiProvider.getPong()).thenThrow(Exception());
 
-    expect(() async => await datasource(parameters), throwsA(isA<ApiPingError>()));
+    expect(() async => await datasource(parameters), throwsA(isA<ApiRandomError>()));
   });
 }

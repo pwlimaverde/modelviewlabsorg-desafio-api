@@ -2,6 +2,7 @@ import 'package:core/src/features/consumo_api_random/domain/usecase/consumo_api_
 import 'package:core/src/features/consumo_api_random/domain/usecase/model/data_api_response_random.dart';
 
 import 'package:core/src/utils/erros.dart';
+import 'package:core/src/utils/parameters.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -10,13 +11,13 @@ final class ConsumoApiRandomDatasourceMock extends Mock
     implements Datasource<DataApiResponseRandom> {}
 
 void main() {
-  late NoParams parameters;
+  late ParametrosRandom parameters;
   late Datasource<DataApiResponseRandom> datasource;
   late UsecaseBaseCallData<PasswordSchemaModel, DataApiResponseRandom>
       consumoApiRandomUsecase;
 
   setUp(() {
-    parameters = NoParams(error: ApiPingError(message: "teste data"));
+    parameters = ParametrosRandom(error: ApiRandomError(message: "teste data"));
     datasource = ConsumoApiRandomDatasourceMock();
     consumoApiRandomUsecase = ConsumoApiRandomUsecase(datasource);
   });
@@ -34,7 +35,7 @@ void main() {
       case SuccessReturn<PasswordSchemaModel>():
         expect(data.result, isA<PasswordSchemaModel>());
       case ErrorReturn<PasswordSchemaModel>():
-        expect(data.result, isA<ApiPingError>());
+        fail('Não Deveria ter lançado uma exceção!');
     }
   });
 
@@ -44,7 +45,7 @@ void main() {
     final data = await consumoApiRandomUsecase(parameters);
     switch (data) {
       case SuccessReturn<PasswordSchemaModel>():
-        expect(data.result, isA<PasswordSchemaModel>());
+        fail('Deveria ter lançado uma exceção!');
       case ErrorReturn<PasswordSchemaModel>():
         expect(
             data.result.message,

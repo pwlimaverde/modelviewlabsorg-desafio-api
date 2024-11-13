@@ -1,12 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+
+import 'package:dependencies/dependencies.dart';
+
 
 
 class ErrorResponseModel {
   final String message;
-  final String errors;
+  final List<String>? errors;
   ErrorResponseModel({
     required this.message,
-    required this.errors,
+    this.errors,
   });
 
   Map<String, dynamic> toMap() {
@@ -19,7 +23,7 @@ class ErrorResponseModel {
   factory ErrorResponseModel.fromMap(Map<String, dynamic> map) {
     return ErrorResponseModel(
       message: (map['message'] ?? '') as String,
-      errors: (map['errors'] ?? '') as String,
+      errors: map['errors'] != null ? List<String>.from((map['errors'] as List<String>)) : null,
     );
   }
 
@@ -33,10 +37,11 @@ class ErrorResponseModel {
   @override
   bool operator ==(covariant ErrorResponseModel other) {
     if (identical(this, other)) return true;
+    final listEquals = const DeepCollectionEquality().equals;
   
     return 
       other.message == message &&
-      other.errors == errors;
+      listEquals(other.errors, errors);
   }
 
   @override

@@ -32,7 +32,7 @@ void main() {
       case SuccessReturn<PongResponseModel>():
         expect(data.result, isA<PongResponseModel>());
       case ErrorReturn<PongResponseModel>():
-        expect(data.result, isA<ApiPingError>());
+        fail('Não Deveria ter lançado uma exceção!');
     }
   });
 
@@ -44,7 +44,7 @@ void main() {
     final data = await consumoApiPingUsecase(parameters);
     switch (data) {
       case SuccessReturn<PongResponseModel>():
-        expect(data.result, isA<PongResponseModel>());
+        fail('Deveria ter lançado uma exceção!');
       case ErrorReturn<PongResponseModel>():
         expect(data.result, isA<ApiPingError>());
         expect(data.result.message, equals('Falha na verificação, retorno da API invalido - Resultado - teste erro retorno.'));
@@ -57,7 +57,7 @@ void main() {
     final data = await consumoApiPingUsecase(parameters);
     switch (data) {
       case SuccessReturn<PongResponseModel>():
-        expect(data.result, isA<PongResponseModel>());
+        fail('Deveria ter lançado uma exceção!');
       case ErrorReturn<PongResponseModel>():
         expect(data.result, isA<ApiPingError>());
         expect(data.result.message, equals('Falha ao carregar dados da API.'));
