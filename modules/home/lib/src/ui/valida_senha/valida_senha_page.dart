@@ -28,14 +28,14 @@ class ValidaSenhaPage extends GetView<ValidaSenhaController> {
               height: 80,
               child: IconButton(
                   onPressed: () {
-                    // controller.logOut(
-                    //   onSuccess: () {
-                    //     Get.snackbar("Sucesso", "Sucesso ao fazer LogOut");
-                    //   },
-                    //   onFail: () {
-                    //     Get.snackbar("Erro", "Erro ao fazer LogOut");
-                    //   },
-                    // );
+                    controller.consumoApiPing(
+                      onSuccess: () {
+                        Get.snackbar("Sucesso", "Sucesso ao Chamar API");
+                      },
+                      onFail: () {
+                        Get.snackbar("Erro", "Erro ao ao Chamar API");
+                      },
+                    );
                   },
                   icon: const FaIcon(FontAwesomeIcons.arrowRightFromBracket)),
             ),
@@ -67,7 +67,7 @@ class ValidaSenhaPage extends GetView<ValidaSenhaController> {
             child: SizedBox(
               width: 80,
               height: 80,
-              child: Obx(() => Text(controller.teste.value)),
+              child: Obx(() => Text(controller.isPong.value.toString())),
             ),
           ),
         ],

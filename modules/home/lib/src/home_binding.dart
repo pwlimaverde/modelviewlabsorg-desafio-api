@@ -10,7 +10,9 @@ class HomeBinding implements Binding {
       () => ConfirmaValidaSenhaController(),
     ),
     Bind.lazyPut<ValidaSenhaController>(
-      () => ValidaSenhaController(),
+      () => ValidaSenhaController(
+        featuresCorePresenter: Get.find<FeaturesCorePresenter>(),
+      ),
     ),
   ];
 }
