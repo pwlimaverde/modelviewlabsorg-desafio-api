@@ -28,14 +28,7 @@ class ValidaSenhaPage extends GetView<ValidaSenhaController> {
               height: 80,
               child: IconButton(
                   onPressed: () {
-                    controller.consumoApiPing(
-                      onSuccess: () {
-                        Get.snackbar("Sucesso", "Sucesso ao Chamar API");
-                      },
-                      onFail: () {
-                        Get.snackbar("Erro", "Erro ao Chamar API");
-                      },
-                    );
+                    controller.consumoApiPing();
                   },
                   icon: const FaIcon(FontAwesomeIcons.arrowRightFromBracket)),
             ),
@@ -46,15 +39,7 @@ class ValidaSenhaPage extends GetView<ValidaSenhaController> {
               height: 80,
               child: IconButton(
                   onPressed: () {
-                    controller.consumoApiRandom(
-                      onSuccess: () {
-                        Get.snackbar(
-                            "Sucesso", "Sucesso ao Gerar senha pela API");
-                      },
-                      onFail: () {
-                        Get.snackbar("Erro", "Erro ao Gerar senha pela API");
-                      },
-                    );
+                    controller.consumoApiRandom();
                   },
                   icon: const FaIcon(FontAwesomeIcons.userXmark)),
             ),
@@ -66,14 +51,6 @@ class ValidaSenhaPage extends GetView<ValidaSenhaController> {
               child: IconButton(
                   onPressed: () {
                     controller.consumoApiValidator(
-                      onSuccess: () {
-                        Get.snackbar(
-                            "Sucesso", "Sucesso ao Validar a senha pela API");
-                      },
-                      onFail: () {
-                        Get.snackbar(
-                            "Erro", "Erro ao Validar a senha pela API");
-                      },
                       password: '123456',
                     );
                   },
