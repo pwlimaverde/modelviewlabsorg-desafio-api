@@ -13,6 +13,7 @@ dependencies:
   return_success_or_error: ^0.18.0
   get: ^5.0.0-release-candidate-9.2.1
   font_awesome_flutter: ^10.7.0
+  logger: ^2.2.0
 
 
   #modulos
