@@ -1,7 +1,6 @@
 import 'package:dependencies/dependencies.dart';
 
 import '../models/pong_response_model.dart';
-import '../models/result_validate.dart';
 import '../utils/erros.dart';
 import '../utils/parameters.dart';
 import '../utils/typedefs.dart';
@@ -40,7 +39,6 @@ final class FeaturesCorePresenter {
         error: ApiPingError(message: "Errro ao carregar dados da API"),
       ),
     );
-    Logger().d(data);
     switch (data) {
       case SuccessReturn<PongResponseModel>():
         return true;
