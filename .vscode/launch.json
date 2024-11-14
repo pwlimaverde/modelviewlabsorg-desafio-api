@@ -5,6 +5,26 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "client_web_modelviewlabsorg_desafio_api  - DEV",
+            "cwd": "apps\\client_web_modelviewlabsorg_desafio_api",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define-from-file=env/dev.json",
+                "--wasm"
+            ]
+        },
+        {
+            "name": "client_web_modelviewlabsorg_desafio_api  - PROD",
+            "cwd": "apps\\client_web_modelviewlabsorg_desafio_api",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define-from-file=env/prod.json",
+                "--wasm"
+            ]
+        },
+        {
             "name": "client_android_modelviewlabsorg_desafio_api  - DEV",
             "cwd": "apps\\client_android_modelviewlabsorg_desafio_api",
             "request": "launch",

@@ -1,3 +1,6 @@
+## 0.0.4
+Integração com Client Web.
+
 ## 0.0.3
 Desenvolvimento do layout.
 1 - Configuração core controller para disponibilizar os metodos de consumo da api.
