@@ -41,6 +41,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  core:
+    dependency: transitive
+    description:
+      path: "../../modules/core"
+      relative: true
+    source: path
+    version: "0.0.0"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -49,6 +56,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
+  dependencies:
+    dependency: "direct main"
+    description:
+      path: "../../modules/dependencies"
+      relative: true
+    source: path
+    version: "0.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -74,6 +88,34 @@ packages:
     dependency: "direct dev"
     description: flutter
     source: sdk
+    version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  font_awesome_flutter:
+    dependency: transitive
+    description:
+      name: font_awesome_flutter
+      sha256: d3a89184101baec7f4600d58840a764d2ef760fe1c5a20ef9e6b0e9b24a07a3a
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.8.0"
+  get:
+    dependency: transitive
+    description:
+      name: get
+      sha256: "7172032cf9acae0b16552ff367f211c36b321846509d7e56fc0938def2e147bc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.0-release-candidate-9.2.1"
+  home:
+    dependency: transitive
+    description:
+      path: "../../modules/home"
+      relative: true
+    source: path
     version: "0.0.0"
   leak_tracker:
     dependency: transitive
@@ -139,6 +181,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.0"
+  return_success_or_error:
+    dependency: transitive
+    description:
+      name: return_success_or_error
+      sha256: "9cf004a151fb712b5766f6e708daf871a3d889849cd4e493eac6682e8221d6e7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.18.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -192,6 +242,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.2"
+  validatorless:
+    dependency: transitive
+    description:
+      name: validatorless
+      sha256: ddb46df636114b3322d289489164cac309767b157191ba43c7ad49b28c2b57c7
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.3"
   vector_math:
     dependency: transitive
     description:
@@ -208,6 +266,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "14.2.5"
+  web:
+    dependency: transitive
+    description:
+      name: web
+      sha256: cd3543bd5798f6ad290ea73d210f423502e71900302dde696f8bff84bf89a1cb
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
 sdks:
   dart: ">=3.5.4 <4.0.0"
-  flutter: ">=3.18.0-18.0.pre.54"
+  flutter: ">=3.24.4"

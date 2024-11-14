@@ -1,4 +1,3 @@
-import 'package:core/src/features/consumo_api_random/domain/usecase/model/data_api_response_random.dart';
 import 'package:core/src/features/consumo_api_validate/datasource/get_connect_api_datasource.dart/api_validate_provider.dart';
 import 'package:core/src/features/consumo_api_validate/datasource/get_connect_api_datasource.dart/consumo_api_validate_datasource.dart';
 import 'package:core/src/features/consumo_api_validate/domain/usecase/model/data_api_response_validate.dart';
