@@ -28,7 +28,7 @@ final class CoreController extends GetxController {
     }
   }
 
-  Future<Map<String, dynamic>> consumoApiValidator(
+  Future<ResultValidate> consumoApiValidator(
     String password,
   ) async {
     try {

@@ -1,6 +1,7 @@
 import 'package:dependencies/dependencies.dart';
 
 import '../models/pong_response_model.dart';
+import '../models/result_validate.dart';
 import '../utils/erros.dart';
 import '../utils/parameters.dart';
 import '../utils/typedefs.dart';
@@ -62,7 +63,7 @@ final class FeaturesCorePresenter {
     }
   }
 
-  Future<Map<String, dynamic>> consumoApiValidator(String password) async {
+  Future<ResultValidate> consumoApiValidator(String password) async {
     final data = await _consumoApiValidateUsecase(
       ParametrosValidate(
         error: ApiValidateError(
@@ -73,11 +74,11 @@ final class FeaturesCorePresenter {
     );
     switch (data) {
       case SuccessReturn<ValidateSuccessModel>():
-        return data.result.toMap();
+        return ResultValidate(validateSuccess: data.result);
       case ErrorReturn<ValidateSuccessModel>():
         final error = data.result;
         if (error is ApiValidateError) {
-          return error.errorResponse?.toMap() ?? {};
+          return ResultValidate(errorResponse: error.errorResponse);
         } else {
           throw error.message;
         }

@@ -21,9 +21,9 @@ class ValidaSenhaController extends GetxController
 
   final message = Rxn<MessageModel>();
   final statusLoad = false.obs;
-  final isPong = false.obs;
-  final radomPassword = ''.obs;
-  final validatePassword = <String, dynamic>{}.obs;
+
+  final testeApiPing = 'Ping...'.obs;
+  final alertasAPI = ''.obs;
 
   Future<void> consumoApiPing() async {
     try {
@@ -31,7 +31,8 @@ class ValidaSenhaController extends GetxController
       final result = await _coreController.consumoApiPing();
 
       if (result) {
-        isPong(true);
+        testeApiPing('Pong!');
+        alertasAPI('API Funcionando!');
         message(
           MessageModel.info(
             title: "Sucesso",
@@ -39,16 +40,18 @@ class ValidaSenhaController extends GetxController
           ),
         );
       } else {
-        isPong(false);
+        testeApiPing('Ping...');
+        alertasAPI('Falha ao verificar a API Ping!');
         message(
-        MessageModel.error(
-          title: "Erro",
-          message: "Erro ao verificar a API Ping!",
-        ),
-      );
+          MessageModel.error(
+            title: "Erro",
+            message: "Erro ao verificar a API Ping!",
+          ),
+        );
       }
     } catch (e) {
-      isPong(false);
+      testeApiPing('Ping...');
+      alertasAPI('Falha ao verificar a API Ping!');
       message(
         MessageModel.error(
           title: "Erro",
@@ -60,25 +63,27 @@ class ValidaSenhaController extends GetxController
     }
   }
 
-  Future<void> consumoApiRandom() async {
+  Future<String?> consumoApiRandom() async {
     try {
       statusLoad(true);
       final result = await _coreController.consumoApiRandom();
-      radomPassword(result);
+      alertasAPI('Senha forte gerada pela API Random! Teste a validação!');
       message(
         MessageModel.info(
           title: "Sucesso",
           message: "Sucesso ao Gerar senha pela API Random!",
         ),
       );
+      return result;
     } catch (e) {
-      radomPassword('Erro ao gerar senha');
+      alertasAPI('Falha ao Gerar senha pela API Random!');
       message(
         MessageModel.error(
           title: "Erro",
           message: "Erro ao Gerar senha pela API Random!",
         ),
       );
+      return null;
     } finally {
       statusLoad(false);
     }
@@ -90,15 +95,32 @@ class ValidaSenhaController extends GetxController
     try {
       statusLoad(true);
       final result = await _coreController.consumoApiValidator(password);
-      validatePassword(result);
-      message(
-        MessageModel.info(
-          title: "Sucesso",
-          message: "Sucesso ao Validar a senha pela API",
-        ),
-      );
+      if (result.validateSuccess != null) {
+        message(
+          MessageModel.info(
+            title: "Sucesso",
+            message: "Sucesso ao Validar a senha pela API",
+          ),
+        );
+        await Get.offAllNamed(Routes.confirmaValidaSenha.caminho);
+      } else if (result.errorResponse != null) {
+        alertasAPI('''
+        Senha Invalidada!
+        ${result.errorResponse!.message}.
+        ${result.errorResponse!.errors}.
+        ''');
+        message(
+          MessageModel.error(
+            title: "Erro",
+            message: "Erro ao Validar a senha pela API",
+          ),
+        );
+      }
     } catch (e) {
-      radomPassword('Erro ao validar senha');
+      alertasAPI('''
+        Erro ao Validar a senha pela API!
+        $e.
+        ''');
       message(
         MessageModel.error(
           title: "Erro",
@@ -109,4 +131,6 @@ class ValidaSenhaController extends GetxController
       statusLoad(false);
     }
   }
+
+  static ValidaSenhaController get to => Get.find<ValidaSenhaController>();
 }

@@ -1,90 +1,144 @@
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
+
 import 'valida_senha_controller.dart';
 
-class ValidaSenhaPage extends GetView<ValidaSenhaController> {
+class ValidaSenhaPage extends StatefulWidget {
   const ValidaSenhaPage({super.key});
 
   @override
+  State<ValidaSenhaPage> createState() => _ValidaSenhaPageState();
+}
+
+class _ValidaSenhaPageState extends State<ValidaSenhaPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _passwordEC = TextEditingController();
+  final _passwordFocus = FocusNode();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _passwordEC.dispose();
+    _passwordFocus.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
+    return PageBase(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Center(
-            child: SizedBox(
-              width: 80,
-              height: 80,
-              child: IconButton(
-                  onPressed: () {
-                    Get.toNamed(Routes.confirmaValidaSenha.caminho);
-                  },
-                  icon: const FaIcon(FontAwesomeIcons.google)),
-            ),
+          const SizedBox(
+            height: 10,
           ),
-          Center(
-            child: SizedBox(
-              width: 80,
-              height: 80,
-              child: IconButton(
-                  onPressed: () {
-                    controller.consumoApiPing();
-                  },
-                  icon: const FaIcon(FontAwesomeIcons.arrowRightFromBracket)),
+          const LogoPadrao(),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 40,
+              vertical: 20,
             ),
+            child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    FieldPadrao(
+                      label: 'Teste sua senha',
+                      controller: _passwordEC,
+                      focusNode: _passwordFocus,
+                      validator: Validatorless.multiple([
+                        Validatorless.required("Senha obrigatória"),
+                        Validatorless.min(
+                            8, "Senha deve ter no mínimo 8 caracteres!"),
+                        Validatorless.regex(RegExp(r'^(?=.*[0-9]).*$'),
+                            'Senha deve ter pelo menos um número!'),
+                        Validatorless.regex(RegExp(r'^(?=.*[A-Z]).*$'),
+                            'Senha deve ter pelo menos uma letra maiúscula!'),
+                        Validatorless.regex(RegExp(r'^(?=.*[a-z]).*$'),
+                            'Senha deve ter pelo menos uma letra minúscula!'),
+                        Validatorless.regex(RegExp(r'^(?=.*[\W_]).*$'),
+                            'Senha deve ter pelo menos um caracter especial!'),
+                      ]),
+                      obscureText: true,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                          onPressed: () async {
+                            var passwordGerado = await ValidaSenhaController.to
+                                .consumoApiRandom();
+                            if (passwordGerado != null) {
+                              _passwordEC.text = passwordGerado;
+                              _passwordFocus.requestFocus();
+                            }
+                          },
+                          child: const Text('Gerar senha forte!'),
+                        ),
+                        ElevatedButtonPadrao(
+                          onPressed: () {
+                            final formValid =
+                                _formKey.currentState?.validate() ?? false;
+                            if (formValid) {
+                              final password = _passwordEC.text;
+                              ValidaSenhaController.to
+                                  .consumoApiValidator(password: password);
+                            }
+                          },
+                          label: 'Validar Senha',
+                        ),
+                      ],
+                    ),
+                  ],
+                )),
           ),
-          Center(
-            child: SizedBox(
-              width: 80,
-              height: 80,
-              child: IconButton(
-                  onPressed: () {
-                    controller.consumoApiRandom();
-                  },
-                  icon: const FaIcon(FontAwesomeIcons.userXmark)),
-            ),
+          const SizedBox(
+            height: 20,
           ),
-          Center(
-            child: SizedBox(
-              width: 80,
-              height: 80,
-              child: IconButton(
-                  onPressed: () {
-                    controller.consumoApiValidator(
-                      password: '123456',
-                    );
-                  },
-                  icon: const FaIcon(FontAwesomeIcons.angellist)),
-            ),
-          ),
-          Center(
-            child: SizedBox(
-              width: 80,
-              height: 80,
-              child: Obx(() => Text(controller.isPong.value.toString())),
-            ),
-          ),
-          Center(
-            child: SizedBox(
-              width: 80,
-              height: 80,
-              child: Obx(() => Text(controller.radomPassword.value)),
-            ),
-          ),
-          Center(
-            child: SizedBox(
-              width: 200,
-              height: 200,
-              child:
-                  Obx(() => Text(controller.validatePassword.value['message'].toString())),
-            ),
-          ),
-          Center(
-            child: SizedBox(
-              width: 200,
-              height: 200,
-              child:
-                  Obx(() => Text(controller.validatePassword.value['errors'].toString())),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color:
+                    Theme.of(context).colorScheme.inversePrimary.withAlpha(80),
+                border: Border(
+                  top: BorderSide(
+                    width: 2,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+              ),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Quer testar a API?'),
+                      TextButton(
+                        onPressed: () =>
+                            ValidaSenhaController.to.consumoApiPing(),
+                        child: Obx(() =>
+                            Text("${ValidaSenhaController.to.testeApiPing}")),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Obx(
+                    () => Text(
+                      "${ValidaSenhaController.to.alertasAPI}",
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontSize: 15),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
@@ -92,19 +146,3 @@ class ValidaSenhaPage extends GetView<ValidaSenhaController> {
     );
   }
 }
-
-// void _mostrarDialogoConfirmacao({
-//   required VoidCallback onSuccess,
-// }) {
-//   Get.defaultDialog(
-//     title: "Confirmação",
-//     middleText: "Tem certeza que deseja apagar sua conta?",
-//     textConfirm: "Sim",
-//     textCancel: "Não",
-//     confirmTextColor: Colors.white,
-//     onConfirm: onSuccess,
-//     onCancel: () {
-//       Get.back(); // Fecha o diálogo
-//     },
-//   );
-// }
