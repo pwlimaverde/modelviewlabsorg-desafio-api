@@ -1,63 +1,133 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dependencies/dependencies.dart';
 
-class ValidaSenhaController extends GetxController {
-  final FeaturesCorePresenter _featuresCorePresenter;
+class ValidaSenhaController extends GetxController
+    with LoaderMixin, MessagesMixin {
+  final CoreController _coreController;
   ValidaSenhaController({
-    required FeaturesCorePresenter featuresCorePresenter,
-  }) : _featuresCorePresenter = featuresCorePresenter;
+    required CoreController coreController,
+  }) : _coreController = coreController;
 
-  final isPong = false.obs;
-  final radomPassword = ''.obs;
-  final validatePassword = <String, dynamic>{}.obs;
+  @override
+  void onInit() {
+    super.onInit();
+    loaderListener(
+      statusLoad: statusLoad,
+    );
+    messageListener(
+      message: message,
+    );
+  }
 
-  Future<void> consumoApiPing({
-    required VoidCallback onSuccess,
-    required VoidCallback onFail,
-  }) async {
+  final message = Rxn<MessageModel>();
+  final statusLoad = false.obs;
+
+  final testeApiPing = 'Ping...'.obs;
+  final alertasAPI = ''.obs;
+
+  Future<void> consumoApiPing() async {
     try {
-      final result = await _featuresCorePresenter.consumoApiPing();
+      statusLoad(true);
+      final result = await _coreController.consumoApiPing();
 
       if (result) {
-        isPong(true);
-        onSuccess();
+        testeApiPing('Pong!');
+        alertasAPI('API Funcionando!');
+        message(
+          MessageModel.info(
+            title: "Sucesso",
+            message: "Sucesso ao verificar a API Ping!",
+          ),
+        );
       } else {
-        isPong(false);
-        onFail();
+        testeApiPing('Ping...');
+        alertasAPI('Falha ao verificar a API Ping!');
+        message(
+          MessageModel.error(
+            title: "Erro",
+            message: "Erro ao verificar a API Ping!",
+          ),
+        );
       }
     } catch (e) {
-      isPong(false);
-      onFail();
+      testeApiPing('Ping...');
+      alertasAPI('Falha ao verificar a API Ping!');
+      message(
+        MessageModel.error(
+          title: "Erro",
+          message: "Erro ao ao verificar a API Ping!",
+        ),
+      );
+    } finally {
+      statusLoad(false);
     }
   }
 
-  Future<void> consumoApiRandom({
-    required VoidCallback onSuccess,
-    required VoidCallback onFail,
-  }) async {
+  Future<String?> consumoApiRandom() async {
     try {
-      final result = await _featuresCorePresenter.consumoApiRandom();
-
-      radomPassword(result);
-      onSuccess();
+      statusLoad(true);
+      final result = await _coreController.consumoApiRandom();
+      alertasAPI('Senha forte gerada pela API Random! Teste a validação!');
+      message(
+        MessageModel.info(
+          title: "Sucesso",
+          message: "Sucesso ao Gerar senha pela API Random!",
+        ),
+      );
+      return result;
     } catch (e) {
-      radomPassword('Erro ao gerar senha');
-      onFail();
+      alertasAPI('Falha ao Gerar senha pela API Random!');
+      message(
+        MessageModel.error(
+          title: "Erro",
+          message: "Erro ao Gerar senha pela API Random!",
+        ),
+      );
+      return null;
+    } finally {
+      statusLoad(false);
     }
   }
+
   Future<void> consumoApiValidator({
-    required VoidCallback onSuccess,
-    required VoidCallback onFail,
     required String password,
   }) async {
     try {
-      final result = await _featuresCorePresenter.consumoApiValidator(password);
-      Logger().i(result);
-      validatePassword(result);
-      onSuccess();
+      statusLoad(true);
+      final result = await _coreController.consumoApiValidator(password);
+      if (result.validateSuccess != null) {
+        message(
+          MessageModel.info(
+            title: "Sucesso",
+            message: "Sucesso ao Validar a senha pela API",
+          ),
+        );
+        await Get.offAllNamed(Routes.confirmaValidaSenha.caminho, arguments: [
+          result.validateSuccess?.id,
+          result.validateSuccess?.message
+        ]);
+      } else if (result.errorResponse != null) {
+        alertasAPI(
+            'Senha Invalidada! - Message ${result.errorResponse!.message}. Errors ${result.errorResponse!.errors}.');
+        message(
+          MessageModel.error(
+            title: "Erro",
+            message: "Erro ao Validar a senha pela API",
+          ),
+        );
+      }
     } catch (e) {
-      radomPassword('Erro ao validar senha');
-      onFail();
+      alertasAPI('Erro ao Validar a senha pela API! $e.');
+      message(
+        MessageModel.error(
+          title: "Erro",
+          message: "Erro ao Validar a senha pela API",
+        ),
+      );
+    } finally {
+      statusLoad(false);
     }
   }
+
+  static ValidaSenhaController get to => Get.find<ValidaSenhaController>();
 }
