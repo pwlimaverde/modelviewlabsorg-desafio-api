@@ -2,6 +2,7 @@ name: client_web_modelviewlabsorg_desafio_api
 description: "Client web do aplicativo gerado no Desafio para processo seletivo ModelViewLabsOrg - Desenvolvedor"
 publish_to: 'none' 
 version: 0.0.4
+homepage: "https://modelviewlabsorg-desafio-api.web.app"
 environment:
   sdk: ^3.5.4
 dependencies:
