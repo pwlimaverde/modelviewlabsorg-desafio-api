@@ -1,3 +1,6 @@
+## 0.1.0
+Release inicial.
+
 ## 0.0.4
 Integração com Client Web.
 
