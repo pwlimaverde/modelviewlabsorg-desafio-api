@@ -66,16 +66,21 @@ class CoreBinding implements Binding {
             Get.find<CAPData>(),
           ),
         ),
-        
-        Bind.put<CoreController>(
-          CoreController(),
-        ),
+        ///Bindings referente a feature Core
         Bind.put<FeaturesCorePresenter>(
           FeaturesCorePresenter(
             consumoApiPingUsecase: Get.find<CAPUsecase>(),
             consumoApiRandomUsecase: Get.find<CARUsecase>(),
             consumoApiValidateUsecase: Get.find<CAVUsecase>(),
           ),
+          permanent: true
+        ),
+        
+        Bind.put<CoreController>(
+          CoreController(
+            featuresCorePresenter: Get.find<FeaturesCorePresenter>(),
+          ),
+          permanent: true
         ),
       ];
 }
