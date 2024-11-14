@@ -102,13 +102,13 @@ class ValidaSenhaController extends GetxController
             message: "Sucesso ao Validar a senha pela API",
           ),
         );
-        await Get.offAllNamed(Routes.confirmaValidaSenha.caminho);
+        await Get.offAllNamed(Routes.confirmaValidaSenha.caminho, arguments: [
+          result.validateSuccess?.id,
+          result.validateSuccess?.message
+        ]);
       } else if (result.errorResponse != null) {
-        alertasAPI('''
-        Senha Invalidada!
-        ${result.errorResponse!.message}.
-        ${result.errorResponse!.errors}.
-        ''');
+        alertasAPI(
+            'Senha Invalidada! - Message ${result.errorResponse!.message}. Errors ${result.errorResponse!.errors}.');
         message(
           MessageModel.error(
             title: "Erro",
@@ -117,10 +117,7 @@ class ValidaSenhaController extends GetxController
         );
       }
     } catch (e) {
-      alertasAPI('''
-        Erro ao Validar a senha pela API!
-        $e.
-        ''');
+      alertasAPI('Erro ao Validar a senha pela API! $e.');
       message(
         MessageModel.error(
           title: "Erro",

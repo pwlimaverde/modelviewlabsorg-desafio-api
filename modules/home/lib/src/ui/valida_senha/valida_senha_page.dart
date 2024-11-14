@@ -130,11 +130,14 @@ class _ValidaSenhaPageState extends State<ValidaSenhaPage> {
                     height: 30,
                   ),
                   Obx(
-                    () => Text(
-                      "${ValidaSenhaController.to.alertasAPI}",
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontSize: 15),
+                    () => Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: Text(
+                        "${ValidaSenhaController.to.alertasAPI}",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontSize: 15),
+                      ),
                     ),
                   ),
                 ],

@@ -6,6 +6,7 @@ Desenvolvimento do layout.
 4 - Configuração do thema.
 5 - Configuração dos assets.
 6 - Criação da tela ValidaSenhaPage.
+7 - Criação da tela ConfirmaValidaSenhaPage.
 
 ## 0.0.2
 Desenvolvimento do código fonte.
