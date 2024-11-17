@@ -34,7 +34,7 @@ class ConfirmaValidaSenhaPage extends GetView<ConfirmaValidaSenhaController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButtonPadrao(
-                      onPressed: () => Get.offAllNamed(Routes.initial.caminho),
+                      onPressed: () => Get.offAllNamed(Routes.home.caminho),
                       label: 'Teste Nova Senha',
                     ),
                   ],
@@ -76,6 +76,18 @@ class ConfirmaValidaSenhaPage extends GetView<ConfirmaValidaSenhaController> {
                     children: [
                       Obx(() => Text("message -${controller.message}")),
                     ],
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Text('by @pwlimaverde'),
+                      ),
+                    ),
                   ),
                 ],
               ),
