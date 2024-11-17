@@ -8,6 +8,8 @@ final class CoreController extends GetxController {
     required FeaturesCorePresenter featuresCorePresenter,
   }) : _featuresCorePresenter = featuresCorePresenter;
 
+  final statusValidate = false.obs;
+
   Future<bool> consumoApiPing() async {
     try {
       return await _featuresCorePresenter.consumoApiPing();

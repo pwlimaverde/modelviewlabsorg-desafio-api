@@ -140,6 +140,18 @@ class _ValidaSenhaPageState extends State<ValidaSenhaPage> {
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Text('by @pwlimaverde'),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

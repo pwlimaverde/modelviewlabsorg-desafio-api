@@ -2,7 +2,7 @@ name: client_android_modelviewlabsorg_desafio_api
 description: "Client android do aplicativo gerado no Desafio para processo seletivo ModelViewLabsOrg - Desenvolvedor"
 
 publish_to: 'none' 
-version: 0.1.0
+version: 0.2.0
 homepage: https://github.com/pwlimaverde/modelviewlabsorg-desafio-api
 environment:
   sdk: ^3.5.4

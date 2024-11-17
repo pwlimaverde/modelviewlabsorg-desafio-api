@@ -18,3 +18,5 @@ export 'src/ui/widgets/field_padrao.dart';
 export 'src/ui/widgets/elevated_button_padrao.dart';
 export 'src/ui/widgets/logo_padrao.dart';
 export 'src/ui/widgets/verificado_padrao.dart';
+export 'src/ui/pagina_nao_encontrada/pagina_nao_encontrada.dart';
+export 'src/ui/pagina_acesso_negado/pagina_acesso_negado.dart';
