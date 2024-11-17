@@ -27,7 +27,8 @@ final class AppWidget extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      initialRoute: '/home',
+      unknownRoute: GetPage(name: Routes.paginaNaoEncontrada.caminho, page: () => const PaginaNaoEncontrada()),
+      initialRoute: Routes.home.caminho,
       binds: [
         ...CoreBinding().dependencies(),
       ],
