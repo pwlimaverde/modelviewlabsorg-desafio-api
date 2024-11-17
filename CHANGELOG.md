@@ -1,3 +1,6 @@
+## 0.2.0
+Ajuste nas rotas.
+
 ## 0.1.0
 Release inicial.
 

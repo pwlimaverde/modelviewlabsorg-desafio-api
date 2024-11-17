@@ -77,6 +77,18 @@ class ConfirmaValidaSenhaPage extends GetView<ConfirmaValidaSenhaController> {
                       Obx(() => Text("message -${controller.message}")),
                     ],
                   ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Text('by @pwlimaverde'),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
