@@ -34,7 +34,7 @@ class ConfirmaValidaSenhaPage extends GetView<ConfirmaValidaSenhaController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButtonPadrao(
-                      onPressed: () => Get.offAllNamed(Routes.initial.caminho),
+                      onPressed: () => Get.offAllNamed(Routes.home.caminho),
                       label: 'Teste Nova Senha',
                     ),
                   ],

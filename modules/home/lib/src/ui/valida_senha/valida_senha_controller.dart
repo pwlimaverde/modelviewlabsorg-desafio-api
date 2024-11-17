@@ -17,6 +17,9 @@ class ValidaSenhaController extends GetxController
     messageListener(
       message: message,
     );
+    _coreController.statusValidate(false);
+    testeApiPing('Ping...');
+    alertasAPI('');
   }
 
   final message = Rxn<MessageModel>();
@@ -102,10 +105,11 @@ class ValidaSenhaController extends GetxController
             message: "Sucesso ao Validar a senha pela API",
           ),
         );
-        await Get.offAllNamed(Routes.confirmaValidaSenha.caminho, arguments: [
-          result.validateSuccess?.id,
-          result.validateSuccess?.message
-        ]);
+        _coreController.statusValidate(true);
+        await Get.offAllNamed(Routes.confirmaValidaSenha.caminho, arguments: {
+          'id': result.validateSuccess?.id,
+          'message': result.validateSuccess?.message
+        });
       } else if (result.errorResponse != null) {
         alertasAPI(
             'Senha Invalidada! - Message ${result.errorResponse!.message}. Errors ${result.errorResponse!.errors}.');

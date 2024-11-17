@@ -27,6 +27,7 @@ final class AppWidget extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
+      initialRoute: '/home',
       binds: [
         ...CoreBinding().dependencies(),
       ],

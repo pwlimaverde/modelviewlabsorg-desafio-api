@@ -11,11 +11,20 @@
             "type": "dart",
             "args": [
                 "--dart-define-from-file=env/dev.json",
+            ]
+        },
+        {
+            "name": "client_web_modelviewlabsorg_desafio_api  - DEV WASM",
+            "cwd": "apps\\client_web_modelviewlabsorg_desafio_api",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define-from-file=env/dev.json",
                 "--wasm"
             ]
         },
         {
-            "name": "client_web_modelviewlabsorg_desafio_api  - PROD",
+            "name": "client_web_modelviewlabsorg_desafio_api  - PROD WASM",
             "cwd": "apps\\client_web_modelviewlabsorg_desafio_api",
             "request": "launch",
             "type": "dart",
